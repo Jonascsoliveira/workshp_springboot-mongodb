@@ -1,5 +1,6 @@
 package com.jonasoliveira.workshopmongodb.services;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +24,11 @@ public class PostService {
 	
 	public List<Post> findByTitle(String title){
 		return repo.searchTitle(title);
+	}
+	
+	public List<Post> fullSearch(String text, Date minDate, Date maxDate){
+		//gerando data maxima até as 00:00 do dia seguinte
+		maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+		return repo.fullSearch(text, minDate, maxDate);
 	}
 }
